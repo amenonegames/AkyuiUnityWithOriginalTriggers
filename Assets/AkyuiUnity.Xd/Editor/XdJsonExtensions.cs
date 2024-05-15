@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AkyuiUnity.Editor;
 using UnityEngine;
 using XdParser;
@@ -29,7 +31,61 @@ namespace AkyuiUnity.Xd
         {
             return GetParameters(parentName).Contains(name.ToLowerInvariant());
         }
+        
+        public static bool HasCommand(this XdObjectJson xdObjectJson, string name) => HasCommand(xdObjectJson.Name, name);
+        public static string[] GetCommands(this XdObjectJson xdObjectJson) => GetCommands(xdObjectJson.Name);
+        public static bool HasTag (this XdObjectJson xdObjectJson, string name) => HasTag(xdObjectJson.Name, name);
+        public static string[] GetTags(this XdObjectJson xdObjectJson) => GetTags(xdObjectJson.Name);
 
+        private static bool HasCommand(string parentName, string name)
+        {
+            return GetCommands(parentName).Length>0;
+        }
+        
+        private static string[] GetCommands(string name)
+        {
+            if (name == null) return new string[] { };
+
+            // 正規表現パターンを定義します。`<<`と`>>`の間の文字を非貪欲にマッチします。
+            Regex regex = new Regex("<<(.+?)>>");
+        
+            // マッチしたすべての部分を探します。
+            MatchCollection matches = regex.Matches(name);
+            if (matches.Count <= 1) return new string[] { };
+            
+            var results = new List<string>();
+            
+            foreach (Match match in matches)
+            {
+                if (match.Success)
+                {
+                    var commands = match.Groups[1].Value.Split(',');
+
+                    foreach (var command in commands)
+                    {
+                        results.Add(command.Trim());
+                    }
+                }
+            }
+
+            return results.ToArray();
+        }
+        
+        private static bool HasTag(string parentName, string name)
+        {
+            return GetTags(parentName).Contains(name.ToLowerInvariant());
+        }
+
+        private static string[] GetTags( string name )
+        {
+            if (name == null) return new string[] { };
+
+            var e = name.Split('#');
+            if (e.Length <= 1) return new string[] { };
+
+            return e.Select(x => x.ToLowerInvariant().Trim()).ToArray();
+        }
+        
         private static string[] GetParameters(string name)
         {
             if (name == null) return new string[] { };
