@@ -215,6 +215,18 @@ namespace AkyuiUnity
         }
     }
 
+    public class AmenoneTextComponent : TextComponent
+    {
+        public readonly string[] Commands;
+        public readonly string[] Tags;
+        
+        public AmenoneTextComponent(string text, float? size, Color? color, TextAlign? align, string font, bool? wrap, float? lineHeight, string[] commands, string[] tags) : base(text, size, color, align, font, wrap, lineHeight)
+        {
+            Commands = commands;
+            Tags = tags;
+        }
+    }
+
     public class ButtonComponent : IComponent
     {
         public const string TypeString = "button";
