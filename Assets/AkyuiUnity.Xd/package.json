@@ -8,5 +8,8 @@
   "dependencies": {
     "com.unity.vectorgraphics": "2.0.0-preview.17"
   },
+  "author": {
+    "name": "amenone"
+  },
   "type": "library"
 }
