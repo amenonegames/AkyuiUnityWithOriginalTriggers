@@ -34,7 +34,7 @@ namespace AkyuiUnity.Xd
             return bounds;
         }
 
-        public (IComponent[], IAsset[]) Render(XdObjectJson xdObject, XdAssetHolder assetHolder, IObbGetter obbGetter)
+        public virtual (IComponent[], IAsset[]) Render(XdObjectJson xdObject, XdAssetHolder assetHolder, IObbGetter obbGetter)
         {
             var components = new List<IComponent>();
             var assets = new List<IAsset>();

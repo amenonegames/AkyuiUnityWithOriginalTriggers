@@ -86,7 +86,7 @@ namespace AkyuiUnity.Xd
             return new Rect(position, size);
         }
 
-        public (IComponent[], IAsset[]) Render(XdObjectJson xdObject, Obb obb, XdAssetHolder assetHolder)
+        public virtual (IComponent[], IAsset[]) Render(XdObjectJson xdObject, Obb obb, XdAssetHolder assetHolder)
         {
             var (imageComponent, assets) = RenderImage(xdObject, obb, assetHolder);
             return (new IComponent[] { imageComponent }, assets);

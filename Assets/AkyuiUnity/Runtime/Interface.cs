@@ -153,6 +153,18 @@ namespace AkyuiUnity
             SpriteHash = spriteHash;
         }
     }
+    
+    public class AmenoneImageComponent: ImageComponent
+    {
+        public readonly string[] Commands;
+        public readonly string[] Tags;
+
+        public AmenoneImageComponent(string sprite, Color? color, Vector2Int? direction, uint? spriteHash, string[] commands, string[] tags) : base(sprite, color, direction, spriteHash)
+        {
+            Commands = commands;
+            Tags = tags;
+        }
+    }
 
     public class MaskComponent : IComponent
     {
