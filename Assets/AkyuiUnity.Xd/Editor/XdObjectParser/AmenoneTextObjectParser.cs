@@ -36,7 +36,10 @@ namespace AkyuiUnity.Xd
 
             var lineHeight = xdObject.Style?.TextAttributes?.LineHeight;
 
-            components.Add(new TextComponent(rawText, fontSize, color, textAlign, font.PostscriptName, wrap, lineHeight));
+            var commands = xdObject.GetCommands();
+            var tags = xdObject.GetTags();
+
+            components.Add(new AmenoneTextComponent(rawText, fontSize, color, textAlign, font.PostscriptName, wrap, lineHeight, commands, tags));
 
             return (components.ToArray(), new IAsset[] { });
         }
