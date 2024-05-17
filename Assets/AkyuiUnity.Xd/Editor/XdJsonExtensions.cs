@@ -32,12 +32,12 @@ namespace AkyuiUnity.Xd
             return GetParameters(parentName).Contains(name.ToLowerInvariant());
         }
         
-        public static bool HasCommand(this XdObjectJson xdObjectJson, string name) => HasCommand(xdObjectJson.Name, name);
+        public static bool HasCommand(this XdObjectJson xdObjectJson) => HasCommand(xdObjectJson.Name);
         public static string[] GetCommands(this XdObjectJson xdObjectJson) => GetCommands(xdObjectJson.Name);
-        public static bool HasTag (this XdObjectJson xdObjectJson, string name) => HasTag(xdObjectJson.Name, name);
+        public static bool HasTag (this XdObjectJson xdObjectJson) => HasTag(xdObjectJson.Name);
         public static string[] GetTags(this XdObjectJson xdObjectJson) => GetTags(xdObjectJson.Name);
 
-        private static bool HasCommand(string parentName, string name)
+        private static bool HasCommand(string parentName)
         {
             return GetCommands(parentName).Length>0;
         }
@@ -71,9 +71,9 @@ namespace AkyuiUnity.Xd
             return results.ToArray();
         }
         
-        private static bool HasTag(string parentName, string name)
+        private static bool HasTag(string parentName)
         {
-            return GetTags(parentName).Contains(name.ToLowerInvariant());
+            return GetTags(parentName).Length>0;
         }
 
         private static string[] GetTags( string name )

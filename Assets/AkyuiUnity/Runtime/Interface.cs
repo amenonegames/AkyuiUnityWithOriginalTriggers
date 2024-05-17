@@ -153,18 +153,6 @@ namespace AkyuiUnity
             SpriteHash = spriteHash;
         }
     }
-    
-    public class AmenoneImageComponent: ImageComponent
-    {
-        public readonly string[] Commands;
-        public readonly string[] Tags;
-
-        public AmenoneImageComponent(string sprite, Color? color, Vector2Int? direction, uint? spriteHash, string[] commands, string[] tags) : base(sprite, color, direction, spriteHash)
-        {
-            Commands = commands;
-            Tags = tags;
-        }
-    }
 
     public class MaskComponent : IComponent
     {
@@ -226,19 +214,25 @@ namespace AkyuiUnity
             LineHeight = lineHeight;
         }
     }
-
-    public class AmenoneTextComponent : TextComponent
+    
+    public class TagComponent : IComponent
     {
-        public readonly string[] Commands;
         public readonly string[] Tags;
-        
-        public AmenoneTextComponent(string text, float? size, Color? color, TextAlign? align, string font, bool? wrap, float? lineHeight, string[] commands, string[] tags) : base(text, size, color, align, font, wrap, lineHeight)
+        public TagComponent(string[] tags)
         {
-            Commands = commands;
             Tags = tags;
         }
     }
-
+    
+    public class CommandComponent : IComponent
+    {
+        public readonly string[] Commands;
+        public CommandComponent(string[] commands)
+        {
+            Commands = commands;
+        }
+    }
+    
     public class ButtonComponent : IComponent
     {
         public const string TypeString = "button";
