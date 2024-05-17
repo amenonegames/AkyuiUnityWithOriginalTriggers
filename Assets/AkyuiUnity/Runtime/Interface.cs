@@ -217,6 +217,7 @@ namespace AkyuiUnity
     
     public class TagComponent : IComponent
     {
+        public const string TypeString = "tag";
         public readonly string[] Tags;
         public TagComponent(string[] tags)
         {
@@ -226,6 +227,7 @@ namespace AkyuiUnity
     
     public class CommandComponent : IComponent
     {
+        public const string TypeString = "command";
         public readonly string[] Commands;
         public CommandComponent(string[] commands)
         {

@@ -240,6 +240,14 @@ namespace AkyuiUnity.Loader
             {
                 dict["type"] = InputFieldComponent.TypeString;
             }
+            else if (source is TagComponent)
+            {
+                dict["type"] = TagComponent.TypeString;
+            }
+            else if (source is CommandComponent)
+            {
+                dict["type"] = CommandComponent.TypeString;
+            }
             else
             {
                 throw new NotSupportedException($"Component type {source} is not supported");
