@@ -28,6 +28,8 @@ namespace AkyuiUnity.Extensions
         private Component CreateText(GameObject gameObject, TextComponent textComponent)
         {
             var text = gameObject.AddComponent<TextMeshProUGUI>();
+            if (text is null) return null;
+
             text.enableWordWrapping = false;
             text.overflowMode = TextOverflowModes.Overflow;
             text.richText = false;

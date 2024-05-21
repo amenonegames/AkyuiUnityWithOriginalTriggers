@@ -47,11 +47,11 @@ namespace AkyuiUnity.Xd
             if (name == null) return new string[] { };
 
             // 正規表現パターンを定義します。`<<`と`>>`の間の文字を非貪欲にマッチします。
-            Regex regex = new Regex("__(.+?)__");
+            Regex regex = new Regex("<<(.+?)>>");
         
             // マッチしたすべての部分を探します。
             MatchCollection matches = regex.Matches(name);
-            if (matches.Count <= 1) return new string[] { };
+            if (matches.Count < 1) return new string[] { };
             
             var results = new List<string>();
             

@@ -300,6 +300,7 @@ namespace AkyuiUnity.Generator.InternalTrigger
         private static Component CreateText(GameObject gameObject, IAssetLoader assetLoader, TextComponent textComponent)
         {
             var text = gameObject.AddComponent<Text>();
+            if (text is null) return null;
             text.verticalOverflow = VerticalWrapMode.Overflow;
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
             text.supportRichText = false;

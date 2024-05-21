@@ -28,7 +28,7 @@ namespace AkyuiUnity.Xd
         {
             new ScrollbarObjectParser(), // ShapeObjectParserより前
             new ShapeObjectParser(),
-            new TextObjectParser(),
+            // new TextObjectParser(),常にTextMeshProを使うため削除
         };
 
         private static readonly IXdGroupParser[] DefaultGroupParsers =
@@ -388,11 +388,23 @@ namespace AkyuiUnity.Xd
                 else if (constTop) anchorY = AnchorYType.Top;
                 else if (constBottom) anchorY = AnchorYType.Bottom;
 
+                var components = new List<IComponent>(10);
+                var assets = new List<IAsset>(10);
                 foreach (var parser in _objectParsers)
                 {
                     if (!parser.Is(xdObject)) continue;
-                    var (components, assets) = parser.Render(xdObject, obb, _xdAssetHolder);
+                    var (tempComponents, tempAssets) = parser.Render(xdObject, obb, _xdAssetHolder);
+                    components.AddRange(tempComponents);
+                    
+                    foreach (var asset in tempAssets)
+                    {
+                        if (Assets.Any(x => x.FileName == asset.FileName)) continue;
+                        Assets.Add(asset);
+                    }
+                }
 
+                if (components.Count > 0)
+                {
                     var children = new IElement[] { };
                     if (xdObject.Group != null) children = Render(xdObject.Group.Children, originalObb, parents.Concat(new[] { xdObject }).ToArray());
 
@@ -405,7 +417,7 @@ namespace AkyuiUnity.Xd
                         anchorY,
                         rotation,
                         xdObject.Visible ?? true,
-                        components,
+                        components.ToArray(),
                         children.Select(x => x.Eid).ToArray()
                     );
 
@@ -419,16 +431,18 @@ namespace AkyuiUnity.Xd
                     return new IElement[] { element };
                 }
 
+                
                 if (xdObject.Type == "group")
                 {
-                    var components = new List<IComponent>();
+                    components = new List<IComponent>();
+                    assets = new List<IAsset>();
                     foreach (var parser in _groupParsers)
                     {
                         if (!parser.Is(xdObject, parents)) continue;
-                        var (c, assets) = parser.Render(xdObject, _xdAssetHolder, _obbHolder);
+                        var (c, tempAssets) = parser.Render(xdObject, _xdAssetHolder, _obbHolder);
                         components.AddRange(c);
 
-                        foreach (var asset in assets)
+                        foreach (var asset in tempAssets)
                         {
                             if (Assets.Any(x => x.FileName == asset.FileName)) continue;
                             Assets.Add(asset);
