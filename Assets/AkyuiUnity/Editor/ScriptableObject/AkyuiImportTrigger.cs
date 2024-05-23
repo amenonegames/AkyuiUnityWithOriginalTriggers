@@ -18,6 +18,7 @@ namespace AkyuiUnity.Editor.ScriptableObject
 
         void OnPostprocessPrefab(IAkyuiLoader loader, ref GameObject prefab);
         void OnPostprocessFile(IAkyuiLoader loader, IPathGetter pathGetter);
+        void OnPostprocessAllFiles(IAkyuiImportSettings settings, IAkyuiLoader[] loaders);
     }
 
     public abstract class AkyuiImportTrigger : UnityEngine.ScriptableObject, IAkyuiImportTrigger
@@ -34,5 +35,6 @@ namespace AkyuiUnity.Editor.ScriptableObject
 
         public virtual void OnPostprocessPrefab(IAkyuiLoader loader, ref GameObject prefab) { }
         public virtual void OnPostprocessFile(IAkyuiLoader loader, IPathGetter pathGetter) { }
+        public virtual void OnPostprocessAllFiles(IAkyuiImportSettings settings, IAkyuiLoader[] loaders) { }
     }
 }

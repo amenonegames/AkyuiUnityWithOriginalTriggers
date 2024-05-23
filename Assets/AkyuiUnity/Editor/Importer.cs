@@ -38,6 +38,7 @@ namespace AkyuiUnity.Editor
             using (var progressBar = new AkyuiProgressBar("Akyui"))
             {
                 progressBar.SetTotal(loaders.Length);
+                
                 foreach (var loader in loaders)
                 {
                     using (logger.SetCategory(loader.LayoutInfo.Name))
@@ -47,6 +48,8 @@ namespace AkyuiUnity.Editor
                     }
                 }
 
+                foreach (var trigger in settings.Triggers) trigger.OnPostprocessAllFiles(settings, loaders); 
+                
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
