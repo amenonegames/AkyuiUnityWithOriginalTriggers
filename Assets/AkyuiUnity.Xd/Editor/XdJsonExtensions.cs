@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -76,15 +77,15 @@ namespace AkyuiUnity.Xd
             return GetTags(parentName).Length>0;
         }
 
-        private static string[] GetTags( string name )
+        private static string[] GetTags(string name)
         {
-            if (name == null) return new string[] { };
+            if (string.IsNullOrEmpty(name)) return Array.Empty<string>();
 
             var partAfterHash = GetPartAfterHash(name);
-            var e = partAfterHash.Split('#');
-            if (e.Length <= 1) return new string[] { };
+            if (string.IsNullOrEmpty(partAfterHash)) return Array.Empty<string>();
 
-            return e.Select(x => x.Trim()).ToArray();
+            var tags = partAfterHash.Split('#').Select(x => x.Trim()).ToArray();
+            return tags.Length == 0 ? new[] { partAfterHash } : tags;
         }
         
         public static string GetPartAfterHash(string input)
