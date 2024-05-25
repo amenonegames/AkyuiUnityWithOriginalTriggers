@@ -80,10 +80,21 @@ namespace AkyuiUnity.Xd
         {
             if (name == null) return new string[] { };
 
-            var e = name.Split('#');
+            var partAfterHash = GetPartAfterHash(name);
+            var e = partAfterHash.Split('#');
             if (e.Length <= 1) return new string[] { };
 
-            return e.Select(x => x.ToLowerInvariant().Trim()).ToArray();
+            return e.Select(x => x.Trim()).ToArray();
+        }
+        
+        public static string GetPartAfterHash(string input)
+        {
+            int hashIndex = input.IndexOf('#');
+            if (hashIndex >= 0 && hashIndex < input.Length - 1)
+            {
+                return input.Substring(hashIndex + 1);
+            }
+            return string.Empty;  // `#`記号がない場合やその後に文字がない場合
         }
         
         private static string[] GetParameters(string name)
