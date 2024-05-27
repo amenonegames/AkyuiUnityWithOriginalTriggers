@@ -301,7 +301,8 @@ namespace AkyuiUnity.Xd
                 {
                     if (!parser.Is(xdObject)) continue;
                     var rect = parser.CalcSize(xdObject);
-
+                    if(rect.width < 0f || rect.height < 0f) continue;
+                    
                     obb.ApplyRect(rect);
                     foreach (var child in children) child.LocalLeftTopPosition -= rect.position;
                     _obbHolder.Set(xdObject, obb);
@@ -332,7 +333,7 @@ namespace AkyuiUnity.Xd
                     {
                         if (!parser.Is(xdObject, parents)) continue;
                         rect = parser.CalcSize(xdObject, rect);
-                        break;
+                        if(rect.width >= 0f || rect.height >= 0f) break;
                     }
 
                     obb.ApplyRect(rect);

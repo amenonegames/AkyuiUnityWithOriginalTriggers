@@ -14,7 +14,7 @@ namespace AkyuiUnity.Xd.Extensions
 
         public override Rect CalcSize(XdObjectJson xdObject, Rect rect)
         {
-            return Rect.zero;
+            return new (0,0,-1,-1);
         }
 
         public override (IComponent[], IAsset[]) Render(XdObjectJson xdObject, XdAssetHolder assetHolder, IObbGetter obbGetter)
