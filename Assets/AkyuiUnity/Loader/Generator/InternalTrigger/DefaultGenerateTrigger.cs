@@ -11,8 +11,8 @@ namespace AkyuiUnity.Generator.InternalTrigger
     {
         public Component CreateComponent(GameObject gameObject, IComponent component, IAssetLoader assetLoader)
         {
-            if (component is ImageComponent imageComponent) return CreateImage(gameObject, assetLoader, imageComponent);
-            if (component is MaskComponent maskComponent) return CreateMask(gameObject, assetLoader, maskComponent);
+            // if (component is ImageComponent imageComponent) return CreateImage(gameObject, assetLoader, imageComponent);
+            // if (component is MaskComponent maskComponent) return CreateMask(gameObject, assetLoader, maskComponent);
             if (component is TextComponent textComponent) return CreateText(gameObject, assetLoader, textComponent);
             if (component is AlphaComponent alphaComponent) return CreateAlpha(gameObject, assetLoader, alphaComponent);
             if (component is ButtonComponent) return CreateButton(gameObject, assetLoader);
