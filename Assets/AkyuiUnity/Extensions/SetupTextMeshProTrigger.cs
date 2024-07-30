@@ -1,4 +1,4 @@
-﻿#if AKYUIUNITY_TEXTMESHPRO_SUPPORT
+﻿
 using System;
 using System.Linq;
 using AkyuiUnity.Editor;
@@ -132,4 +132,4 @@ namespace AkyuiUnity.Extensions
         }
     }
 }
-#endif
+

@@ -1,4 +1,4 @@
-﻿#if AKYUIUNITY_XD_TEXTMESHPRO_SUPPORT
+﻿
 using System.Linq;
 using TMPro;
 using UnityEditor;
@@ -98,4 +98,4 @@ namespace AkyuiUnity.Xd.Extensions
         }
     }
 }
-#endif
+
