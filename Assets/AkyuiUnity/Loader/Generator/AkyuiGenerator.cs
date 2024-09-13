@@ -70,6 +70,7 @@ namespace AkyuiUnity.Generator
             if (element is ObjectElement objectElement)
             {
                 var gameObject = new GameObject(objectElement.Name);
+                if(parent is null) gameObject.AddComponent<Canvas>();
                 eidMap.Add(element.Eid, gameObject);
                 gameObject.transform.SetParent(parent);
 
