@@ -70,11 +70,15 @@ namespace AkyuiUnity.Generator
             if (element is ObjectElement objectElement)
             {
                 var gameObject = new GameObject(objectElement.Name);
-                if(parent is null) gameObject.AddComponent<Canvas>();
                 eidMap.Add(element.Eid, gameObject);
                 gameObject.transform.SetParent(parent);
 
-                var rectTransform = gameObject.AddComponent<RectTransform>();
+                RectTransform rectTransform;
+                if (parent is null) gameObject.AddComponent<Canvas>();
+                
+                if(gameObject.TryGetComponent<RectTransform>(out rectTransform) == false)
+                    rectTransform = gameObject.AddComponent<RectTransform>();
+                
                 var (anchorMin, anchorMax) = CalcAnchor(objectElement.AnchorX, objectElement.AnchorY);
                 gameObject.SetActive(objectElement.Visible);
                 rectTransform.anchoredPosition = new Vector2(objectElement.Position.x, -objectElement.Position.y);
